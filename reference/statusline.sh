@@ -41,6 +41,10 @@ IFS=$'\037' read -r cwd model thinking used five_used five_resets < <(
 # Normalize Windows-style paths if any leak through
 cwd=${cwd//\\//}
 
+# Drop control bytes from anything printed: a directory or model name can hold
+# ESC, which would otherwise inject terminal escape sequences.
+strip_ctrl() { local LC_ALL=C; printf '%s' "${1//[[:cntrl:]]/}"; }
+
 # Last two path components (pure bash)
 short_cwd=""
 if [ -n "$cwd" ]; then
@@ -60,6 +64,10 @@ git_branch=""
 if [ -n "$cwd" ] && [ -d "$cwd" ]; then
   git_branch=$(git -C "$cwd" --no-optional-locks symbolic-ref --short HEAD 2>/dev/null || true)
 fi
+
+short_cwd=$(strip_ctrl "$short_cwd")
+git_branch=$(strip_ctrl "$git_branch")
+thinking=$(strip_ctrl "$thinking")
 
 GREEN=$'\033[0;32m'
 YELLOW=$'\033[0;33m'
@@ -105,7 +113,7 @@ else
 fi
 
 # Strip " (…)" suffix from model display name
-model_base=${model%% (*}
+model_base=$(strip_ctrl "${model%% (*}")
 model_label=$model_base
 [ -n "$thinking" ] && model_label="${model_base} (${thinking})"
 model_segment="${MAGENTA}${model_label}${RESET}"

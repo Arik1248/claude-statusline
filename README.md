@@ -16,7 +16,7 @@ The same line in each state it can take, rendered from the real binary:
 | `Opus 5 (high)` | Model name (any ` (…)` suffix stripped) and the effort level, when set. |
 | `ctx:12%` | Context window used. |
 
-Percentages are green below 70, yellow from 70, red from 90.
+Percentages are green below 70, yellow from 70, red from 90. Control bytes in the directory, branch, model and effort text are stripped before printing.
 
 ## Why C
 
@@ -24,7 +24,7 @@ It runs on every render, so start-up cost matters. On this machine (200 renders,
 
 ## Install
 
-Needs `clang` (Xcode command line tools). The tests also need `jaq` and `python3`.
+Needs `clang` (Xcode command line tools). The tests also need `jaq` (`brew install jaq`).
 
 ```sh
 git clone <this repo> ~/Developer/Code/claude-statusline

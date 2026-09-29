@@ -21,9 +21,10 @@ t() {
 }
 
 # resets_at far in the future keeps the h/m label stable between the two runs
-FUTURE=$(python3 -c 'import time;print(int(time.time())+5400)')
-SOON=$(python3 -c 'import time;print(int(time.time())+600)')
-PAST=$(python3 -c 'import time;print(int(time.time())-60)')
+NOW=$(date +%s)
+FUTURE=$((NOW + 5430))   # +30s so a tick between the two runs cannot cross a minute boundary
+SOON=$((NOW + 630))
+PAST=$((NOW - 60))
 REPO="$B"   # this repo: a real git checkout with a branch
 
 echo "=== full payloads ==="
@@ -69,6 +70,21 @@ echo
 echo "=== degenerate input ==="
 t "empty object"         "{}"
 t "malformed"            "{not json"
+
+echo
+echo "=== hostile input ==="
+# ESC and BEL inside a model name, effort level and directory name must not reach the terminal.
+t "control bytes in model/effort" '{"cwd":"/tmp","model":{"display_name":"Evil\u001b]0;pwned\u0007M"},"effort":{"level":"x\u001b[2Jy"}}'
+EVILROOT=$(mktemp -d)
+mkdir -p "$EVILROOT/$(printf 'a\033]0;pwned\007b')"
+t "control bytes in directory"  "{\"cwd\":\"$EVILROOT/a\\u001b]0;pwned\\u0007b\",\"model\":{\"display_name\":\"M\"}}"
+rm -rf "$EVILROOT"
+t "absurd resets_at (negative)" '{"cwd":"/tmp","model":{"display_name":"M"},"rate_limits":{"five_hour":{"used_percentage":50,"resets_at":-99999999999999999999}}}'
+
+# Parity with the shell proves nothing if both leak, so assert the property directly:
+# the only ESC bytes in the output are our own colour codes ("ESC[0;3Nm" / "ESC[0m").
+leak=$(printf '%s' '{"cwd":"/tmp","model":{"display_name":"Evil\u001b]0;pwned\u0007M"},"effort":{"level":"x\u001b[2Jy"}}' | "$NATIVE" | LC_ALL=C sed -E $'s/\033\\[0(;3[0-9])?m//g' | LC_ALL=C tr -d '[:print:]')
+if [ -z "$leak" ]; then PASSN=$((PASSN+1)); echo "ok   no control bytes leak through"; else FAIL=$((FAIL+1)); echo "FAIL no control bytes leak through"; fi
 
 echo
 echo "passed=$PASSN failed=$FAIL"
