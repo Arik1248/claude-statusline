@@ -60,3 +60,7 @@ Restart Claude Code to pick it up.
 Change `statusline.c` and `reference/statusline.sh` together, add a case to `statusline.test.sh`, and run `./build.sh`. The reference is what keeps the C port honest.
 
 `python3 tools/render-example.py` regenerates `docs/example.svg` and `docs/example.png` from the built binary (the PNG needs Google Chrome on macOS). `docs/live.png` is a real screenshot and is not generated.
+
+## License
+
+Free for personal use, including by an individual using it on their own work machine. Copying, forking, redistributing and organization-wide deployment are not allowed. See [LICENSE](LICENSE).
