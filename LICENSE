@@ -1,71 +1,22 @@
-claude-statusline Personal Use License
+MIT License
 
-Copyright (c) 2026 Arik1248. All rights reserved.
+Copyright (c) 2026 Arik1248
 
-1. Definitions
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
 
-   "Software" means every file in this repository: source code, scripts,
-   documentation and images.
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
 
-   "Personal Use" means use by one natural person, for that person's own
-   purposes, on machines that person operates. It includes an employee or
-   contractor using the Software on a work-issued machine or inside an
-   employer's environment for their own day-to-day work, provided the person
-   installs and uses it individually.
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
 
-2. Grant
-
-   You may, free of charge, download one copy of the Software, build it, and
-   run it for Personal Use. You may make the copies of the Software that are
-   technically necessary to do so (for example, a build directory) and one
-   backup copy. You may modify your copy for your own Personal Use, without
-   sharing the modified copy.
-
-   This grant is personal, non-exclusive, non-transferable and revocable.
-
-3. Restrictions
-
-   Except as Section 2 expressly allows, you may not:
-
-   a. copy, fork, mirror, clone into another repository, or republish the
-      Software or any part of it, on GitHub or anywhere else;
-   b. distribute, sublicense, sell, rent, lend or otherwise make the Software
-      or any part of it available to any other person;
-   c. copy the Software's code, or code derived from it, into another project,
-      including open-source, closed-source and internal tools;
-   d. deploy, bundle or roll out the Software across a team or organization
-      (for example in shared images, dotfiles repositories, package
-      registries or onboarding scripts), or offer it as part of a product or
-      service;
-   e. use the Software, or any part of it, to train or fine-tune a machine
-      learning model;
-   f. remove or alter this license or any copyright notice.
-
-4. GitHub
-
-   Rights you may have to view and fork this repository on GitHub arise solely
-   from GitHub's Terms of Service and are limited to the functionality of that
-   platform. This license grants no rights beyond Section 2, and a fork made
-   through GitHub does not entitle you to use, copy, modify or distribute the
-   Software under any terms other than these.
-
-5. Other permissions
-
-   To ask for permission to do something this license does not allow, contact
-   the copyright holder through the GitHub profile "Arik1248". No permission
-   exists unless it is given in writing by the copyright holder.
-
-6. Termination
-
-   This license ends automatically if you breach it. On termination you must
-   stop using the Software and delete every copy you hold.
-
-7. No warranty
-
-   THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-   IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-   FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-   COPYRIGHT HOLDER BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY,
-   WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
-   IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-   SOFTWARE.

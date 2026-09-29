@@ -63,4 +63,4 @@ Change `statusline.c` and `reference/statusline.sh` together, add a case to `sta
 
 ## License
 
-Free for personal use, including by an individual using it on their own work machine. Copying, forking, redistributing and organization-wide deployment are not allowed. See [LICENSE](LICENSE).
+[MIT](LICENSE). Use it, copy it, fork it; keep the copyright notice.
