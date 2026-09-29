@@ -6,7 +6,7 @@ Native (C) status line for Claude Code. `statusline.c` reads the status payload 
 
 - `./build.sh` — build `./statusline` and run the differential tests. `--quick` builds only.
 - `bash statusline.test.sh` — tests only. Needs `jaq` and `python3`.
-- `python3 tools/render-example.py` — regenerate `docs/example.svg` from the built binary.
+- `python3 tools/render-example.py` — regenerate `docs/example.svg` and `docs/example.png` from the built binary (PNG needs Chrome). `docs/live.png` is a hand-taken screenshot; do not overwrite it.
 
 ## Rules
 

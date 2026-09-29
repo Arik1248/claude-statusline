@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
-"""Render the real ./statusline output for a few payloads into docs/example.svg.
+"""Render the real ./statusline output for a few payloads into docs/example.svg
+and docs/example.png (PNG needs Google Chrome on macOS).
 
 Run from the repo root after ./build.sh:  python3 tools/render-example.py
 """
@@ -59,3 +60,14 @@ svg.append("</svg>")
 out = os.path.join(ROOT, "docs", "example.svg")
 open(out, "w").write("\n".join(svg))
 print("wrote", out)
+
+CHROME = "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome"
+if os.path.exists(CHROME):
+    png = os.path.join(ROOT, "docs", "example.png")
+    subprocess.run([CHROME, "--headless=new", "--disable-gpu", "--hide-scrollbars",
+                    "--force-device-scale-factor=2", "--default-background-color=00000000",
+                    f"--window-size={width},{height}", f"--screenshot={png}", "file://" + out],
+                   check=True, capture_output=True)
+    print("wrote", png)
+else:
+    print("Chrome not found; skipped docs/example.png")

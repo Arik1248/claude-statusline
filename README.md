@@ -2,11 +2,11 @@
 
 A fast, dependency-free status line for [Claude Code](https://claude.com/claude-code), written in C.
 
-![Example output](docs/example.png)
+![The status line in a live Claude Code session](docs/live.png)
 
-```
-4h25m:18% | Code/claude-statusline [main] | Opus 5 (high) | ctx:12%
-```
+The same line in each state it can take, rendered from the real binary:
+
+![Status line states](docs/example.png)
 
 | Segment | Meaning |
 |---|---|
@@ -53,10 +53,10 @@ Restart Claude Code to pick it up.
 | `reference/statusline.sh` | The same behaviour as a shell script (needs `jaq`). It is the specification the tests hold the binary to. |
 | `statusline.test.sh` | Differential tests: the binary must match the reference byte for byte, ANSI codes included. |
 | `build.sh` | Builds the binary, then runs the tests. `--quick` skips the tests. |
-| `tools/render-example.py` | Regenerates `docs/example.svg` from the real binary's output. |
+| `tools/render-example.py` | Regenerates `docs/example.svg` and `docs/example.png` from the real binary's output. |
 
 ## Changing behaviour
 
 Change `statusline.c` and `reference/statusline.sh` together, add a case to `statusline.test.sh`, and run `./build.sh`. The reference is what keeps the C port honest.
 
-To refresh the screenshot: `python3 tools/render-example.py`, then convert `docs/example.svg` to `docs/example.png`.
+`python3 tools/render-example.py` regenerates `docs/example.svg` and `docs/example.png` from the built binary (the PNG needs Google Chrome on macOS). `docs/live.png` is a real screenshot and is not generated.
