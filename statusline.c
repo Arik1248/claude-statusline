@@ -42,6 +42,16 @@ static const char *color_pct(long n) {
     return GREEN;
 }
 
+/* Drops C0 control bytes and DEL in place. Every string printed below comes from
+ * the payload or the filesystem (a directory or model name can hold ESC), so
+ * without this a crafted name could inject terminal escape sequences. */
+static void strip_ctrl(char *s) {
+    char *w = s;
+    for (const char *r = s; *r; r++)
+        if ((unsigned char)*r >= 0x20 && *r != 0x7f) *w++ = *r;
+    *w = 0;
+}
+
 static int is_dir(const char *p) {
     struct stat st;
     return p && *p && stat(p, &st) == 0 && S_ISDIR(st.st_mode);
@@ -141,13 +151,18 @@ int main(void) {
 
     char branch[512];
     git_branch(cwd, branch, sizeof branch);
+    strip_ctrl(short_cwd);
+    strip_ctrl(branch);
+    strip_ctrl(thinking);
 
     Buf out; buf_init(&out);
 
     /* 5-hour rate-limit segment. Hidden once resets_at has passed: the payload's
      * used_percentage still describes the window that just ended, so showing it
      * (as "0m:NN%") would report usage that no longer counts. */
-    long remaining = *five_resets ? atol(five_resets) - (long)time(NULL) : 0;
+    long now = (long)time(NULL);
+    long resets = *five_resets ? strtol(five_resets, NULL, 10) : 0;
+    long remaining = resets > now ? resets - now : 0;   /* no signed overflow on absurd input */
     if (*five_used && *five_resets && remaining > 0) {
         long used_int = int_part(five_used);
         char label[64];
@@ -170,6 +185,7 @@ int main(void) {
     snprintf(model_base, sizeof model_base, "%s", model);
     char *paren = strstr(model_base, " (");
     if (paren) *paren = 0;
+    strip_ctrl(model_base);
     buf_puts(&out, model_base);
     if (*thinking) { buf_puts(&out, " ("); buf_puts(&out, thinking); buf_putc(&out, ')'); }
     buf_puts(&out, RESET);
